@@ -1,0 +1,103 @@
+<?php
+    require_once dirname(__FILE__).'/../lib/me2pheungp/Me2.php';
+    require_once dirname(__FILE__).'/appkey.php';
+    require_once dirname(__FILE__).'/db.php';
+
+    $aprilfoolsday = db::query("
+      Select count(*) From posts
+      Where '2010-04-01' <= posted and posted < '2010-04-02';
+    ")->fetchSingle();
+
+    /* 숙주의 전당
+    $roots = array();
+    $i = 0;
+    foreach (db::roots() as $post) {
+        $scale = db::scale($post->url);
+        if ($scale) {
+            $roots[] = array('post' => $post, 'scale' => $scale);
+            if (++ $i  == 8 * 4) break;
+        }
+    }
+    usort($roots, create_function(
+        '$p, $q',
+        'return $p["scale"] > $q["scale"] ? -1 : 1;'
+    ));
+    */
+?>
+
+<p class="me2virus-info">총감염횟수:
+  <a href="http://me2day.net/tag/me2virus/"><?=
+    number_format(db::total())
+  ?></a><br />2010년 만우절 감염횟수: <?=
+    number_format($aprilfoolsday)
+  ?>
+</p>
+
+<? if ($enable): ?>
+<form action="<?=h($dir) ?>/infect.php" method="post" class="me2virus-initial"
+      onsubmit="return events.formcheck(this)">
+  <div>
+    <input type="hidden" name="initial" value="yes" />
+    <h2 id="initial">최초의 숙주가 되어보세요.</h2>
+
+    <label>http://me2day.net/<input type="text" class="text"
+                                    name="user" /></label>
+    <label>사용자키:
+      <input type="password" class="password" name="userkey" /></label>
+
+    <label>아이콘주소<span class="crumb">(전염됨)</span>:
+      <input type="text" class="text" name="icon"
+             value="<?=h($dir) ?>/callback.gif"
+             onblur="events.imgcheck(this.value)"
+      /></label>
+
+    <label>감염메시지: <input type="text" class="text" name="body" value="최초로 감염되었습니다." /></label>
+
+    <label>App키<span class="crumb">(<a href="http://me2day.net/api/front/appkey">발급받기</a>)</span>:
+      <input type="password" class="password" name="appkey" /></label>
+
+    <label><input type="checkbox" name="agreed" value="yes"
+                  onclick="events.submittable(this.form, this.checked)" />
+      내 App키를 사용하는 숙주 만들기에 동의</label>
+
+    <label><button type="submit">감염</button></label>
+  </div>
+</form>
+<? else: ?>
+<p>미투바이러스가 바이러스에 감염되었습니다. 그동안 감사했어요^~^</p>
+<? endif ?>
+
+<? if (false): ?>
+<h2 id="roots">숙주의 전당</h2>
+<p class="me2virus-roots me2virus-hosts">
+  <? foreach ($roots as $root):
+     $post = $root['post'];
+     $scale = $root['scale'];
+  ?>
+     <a href="<?=h($post->url) ?>"
+        onmouseover="events.inputvisualizer(this)"
+        onmouseout="events.cancelinputvisualizer()">
+       <img src="<?=h($post->icon) ?>" alt="" />
+       <span class="name"><?=h($post->name) ?></span>
+       <span class="scale"><?=$scale ?></span>
+     </a>
+  <? endforeach ?>
+</p>
+<? endif ?>
+
+<form action="<?=h($dir) ?>/visualizations/{visualizer}" method="get"
+      class="me2virus-visualize"
+      onsubmit="return events.correctaction(this)">
+  <div>
+    <h2>시각화</h2>
+    <label>숙주주소: <input type="text" class="text" name="post" /></label>
+    <label>시각화 방법:
+      <select name="visualizer">
+        <option value="hypertree.php">HyperTree</option>
+      </select>
+      <button type="submit">시각화</button>
+    </label>
+  </div>
+</form>
+
+<!-- img src="http://img.subl.ee/screenshot_444.png" alt="설명서" / -->

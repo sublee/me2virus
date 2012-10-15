@@ -1,0 +1,72 @@
+html {
+  font-family: 'Trebuchet MS', 'Lucida Grande', 'Tahoma',
+               'Helvetica', 'Arial', 'hiragino kaku gothic pro',
+               'NanumGothic', 'NanumGothicOTF', sans-serif;
+  font-size: 12px;
+  margin: 0; padding: 0;
+}
+body { margin: 0 auto; padding: 20px 0; width: 400px; }
+a img { border: none; }
+
+a:link, a:visited { text-decoration: none; color: #e65802; }
+a:hover { text-decoration: underline; }
+
+h1 { margin: 0; padding: 0; }
+
+h2 {
+    clear: both;
+    font-weight: bolder; font-size: 15px; text-align: center;
+    margin: 10px 0 20px;
+}
+
+p { margin: 0; padding-bottom: 1em; }
+
+.bottom a:link, .bottom a:visited { color: #797979; }
+.crumb { font-size: 11px; color: #222; }
+
+.bottom { margin-top: 2em; padding-bottom: 0; .padding-top: 1em; }
+
+.me2virus-info { text-align: right; color: #666; }
+
+form label {
+    display: block; width: 400px; padding-bottom: 10px;
+    text-align: right;
+}
+form input.text, form input.password {
+    margin: 0;
+    border: 1px solid #999;
+    width: 250px;
+}
+form input.invalid { background: #fee; color: #c00; }
+
+.me2virus-hosts { text-align: left; font-weight: normal; overflow: hidden; }
+.me2virus-hosts a {
+    display: block; float: left;
+    width: 46px; height: 46px; overflow: hidden;
+    margin: 2px 2px 1px 1px;
+    cursor: pointer;
+}
+.me2virus-hosts a:hover { text-decoration: none; }
+.me2virus-hosts img {
+    display: block; width: 44px; height: 44px;
+    border: 1px solid #c0c0c0;
+}
+.me2virus-hosts a span {
+    display: block; width: 44px; margin-left: 1px;
+    background: #000; color: #fff; text-align: center;
+}
+.me2virus-hosts .name {
+    height: 16px; margin-top: -17px; font-size: 11px;
+    opacity: .60; -moz-opacity: .60; filter: alpha(opacity=60);
+}
+.me2virus-hosts a:hover .name, .me2virus-hosts .scale { visibility: hidden; }
+.me2virus-hosts a:hover .scale {
+    visibility: visible;
+    height: 44px;
+    line-height: 44px;
+    margin-top: -44px;
+    font-weight: bolder;
+    font-size: 16px;
+    opacity: .80; -moz-opacity: .80; filter: alpha(opacity=80);
+}
+

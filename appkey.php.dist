@@ -1,0 +1,4 @@
+<?php
+if (!class_exists('Me2Api')) return;
+Me2Api::$applicationKey = '<ME2DAY_APPLICATION_KEY>';
+
